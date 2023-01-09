@@ -228,8 +228,6 @@
 
       // update calculated price in the HTML
       thisProduct.dom.priceElem.innerHTML = price * thisProduct.amountWidget.value;
-
-      //console.log('selectedParams:', thisProduct.id, thisProduct.selectedParams);
     }
 
     initAmountWidget() {
@@ -355,15 +353,56 @@
 
     add(menuProduct) {
       const thisCart = this;
-      console.log('adding product', menuProduct);
 
       const generatedHTML = templates.cartProduct(menuProduct);
       thisCart.dom.productList = utils.createDOMFromHTML(generatedHTML);
       const cartContainer = document.querySelector(select.containerOf.cart);
       cartContainer.appendChild(thisCart.dom.productList);
+
+      thisCart.products.push(new CartProduct(menuProduct, thisCart.dom.productList));
     }
   }
 
+  class CartProduct {
+    constructor(menuProduct, element) {
+      const thisCartProduct = this;
+
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.params = menuProduct.params;
+
+      thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget();
+    }
+
+    getElements(element) {
+      const thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+    }
+
+    initAmountWidget() {
+      const thisCartProduct = this;
+
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.wrapper);
+      thisCartProduct.amountWidget.element.addEventListener(settings.amountWidget.updateEventName, function() {
+        thisCartProduct.amount = thisCartProduct.amountWidget.input.value;
+        thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+      });
+    }
+  }
+
+  
   const app = {
     initMenu: function() {
       const thisApp = this;
