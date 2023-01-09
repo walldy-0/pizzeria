@@ -360,6 +360,26 @@
       cartContainer.appendChild(thisCart.dom.productList);
 
       thisCart.products.push(new CartProduct(menuProduct, thisCart.dom.productList));
+      thisCart.update();
+    }
+
+    update() {
+      const thisCart = this;
+
+      const deliveryFee = settings.cart.defaultDeliveryFee;
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+
+      for (const product of thisCart.products) {
+        totalNumber += product.amount;
+        subtotalPrice += product.price;
+      }
+
+      thisCart.totalPrice = totalNumber > 0 ? subtotalPrice + deliveryFee : 0;
+
+      console.log('totalNumber:', totalNumber);
+      console.log('subtotalPrice:', subtotalPrice);
+      console.log('totalPrice:', thisCart.totalPrice);
     }
   }
 
