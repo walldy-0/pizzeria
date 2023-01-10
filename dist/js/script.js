@@ -36,7 +36,8 @@
       productList: '.cart__order-summary',
       toggleTrigger: '.cart__summary',
       totalNumber: `.cart__total-number`,
-      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+      totalPriceTop: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+      totalPrice: '.cart__order-total .cart__order-price-sum strong',
       subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
       deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
       form: '.cart__order',
@@ -316,7 +317,9 @@
     announce() {
       const thisWidget = this;
 
-      const event = new Event(settings.amountWidget.updateEventName);
+      const event = new CustomEvent(settings.amountWidget.updateEventName, { 
+        bubbles: true
+      });
       thisWidget.element.dispatchEvent(event);
     }
   }
@@ -339,6 +342,11 @@
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
+      thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
+      thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelector(select.cart.totalPrice);
+      thisCart.dom.totalPriceTop = thisCart.dom.wrapper.querySelector(select.cart.totalPriceTop);
+      thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     }
 
     initActions() {
@@ -346,8 +354,10 @@
 
       thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
         event.preventDefault();
-
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
+      thisCart.dom.wrapper.addEventListener(settings.amountWidget.updateEventName, function() {
+        thisCart.update();
       });
     }
 
@@ -366,7 +376,6 @@
     update() {
       const thisCart = this;
 
-      const deliveryFee = settings.cart.defaultDeliveryFee;
       let totalNumber = 0;
       let subtotalPrice = 0;
 
@@ -375,7 +384,13 @@
         subtotalPrice += product.price;
       }
 
-      thisCart.totalPrice = totalNumber > 0 ? subtotalPrice + deliveryFee : 0;
+      const deliveryFee = totalNumber > 0 ? settings.cart.defaultDeliveryFee : 0;
+      thisCart.totalPrice = subtotalPrice + deliveryFee;
+
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      thisCart.dom.totalPrice.innerHTML = thisCart.dom.totalPriceTop.innerHTML = this.totalPrice;
+      thisCart.dom.totalNumber.innerHTML = totalNumber;
 
       console.log('totalNumber:', totalNumber);
       console.log('subtotalPrice:', subtotalPrice);
