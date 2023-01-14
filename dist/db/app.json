@@ -204,27 +204,19 @@
   ],
   "orders": [
     {
-      "address": "ppp",
-      "phone": "997",
-      "totalPrice": "101",
-      "subtotalPrice": "81",
-      "totalNumber": "18",
+      "address": "",
+      "phone": "",
+      "totalPrice": "38",
+      "subtotalPrice": "18",
+      "totalNumber": "2",
       "deliveryFee": "20",
       "products": [
         {
-          "id": "cake",
-          "name": "Zio Stefano's Doughnut",
-          "amount": 1,
-          "priceSingle": 9,
-          "price": 9,
-          "params": {}
-        },
-        {
           "id": "salad",
           "name": "Nonno Alberto's Salad",
-          "amount": "8",
+          "amount": 2,
           "priceSingle": 9,
-          "price": 72,
+          "price": 18,
           "params": {
             "ingredients": {
               "label": "Ingredients",
