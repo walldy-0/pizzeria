@@ -3,9 +3,10 @@ import {settings, select} from '../settings.js';
 class AmountWidget {
   constructor(element) {
     const thisWidget = this;
-    
     thisWidget.getElements(element);
-    thisWidget.input.value = settings.amountWidget.defaultValue;
+    if (!thisWidget.input.value) {
+      thisWidget.input.value = settings.amountWidget.defaultValue;
+    }
     thisWidget.setValue(thisWidget.input.value);
     thisWidget.initActions();
   }
@@ -21,7 +22,7 @@ class AmountWidget {
 
   setValue(value) {
     const thisWidget = this;
-
+    
     const newValue = parseInt(value);
 
     if (!isNaN(newValue) && newValue >= settings.amountWidget.defaultMin 
