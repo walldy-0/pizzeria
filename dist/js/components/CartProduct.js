@@ -33,8 +33,8 @@ class CartProduct {
     const thisCartProduct = this;
 
     thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.wrapper);
-    thisCartProduct.amountWidget.element.addEventListener(settings.amountWidget.updateEventName, function() {
-      thisCartProduct.amount = thisCartProduct.amountWidget.input.value;
+    thisCartProduct.amountWidget.dom.wrapper.addEventListener(settings.amountWidget.updateEventName, function() {
+      thisCartProduct.amount = thisCartProduct.amountWidget.dom.input.value;
       thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
     });
