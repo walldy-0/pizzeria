@@ -3,14 +3,16 @@ import BaseWidget from './BaseWidget.js';
 
 class AmountWidget extends BaseWidget {
   constructor(element) {
-    super(element, settings.amountWidget.defaultValue);
+    let initialValue = settings.amountWidget.defaultValue;
+    const initialValueFromElm = element.querySelector(select.widgets.amount.input).value;
+    if (initialValueFromElm) {
+      initialValue = initialValueFromElm;
+    }
+
+    super(element, initialValue);
 
     const thisWidget = this;
     thisWidget.getElements(element);
-    //if (!thisWidget.dom.input.value) {
-    //thisWidget.dom.input.value = settings.amountWidget.defaultValue;
-    //}
-    console.log(element);
     thisWidget.setValue(thisWidget.value);
     thisWidget.initActions();
   }
