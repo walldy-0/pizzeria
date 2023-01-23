@@ -4,11 +4,14 @@ import {select, settings} from '../settings.js';
 
 class DatePicker extends BaseWidget{
   constructor(wrapper){
-    super(wrapper, utils.dateToStr(new Date()));
+    const todayString = utils.dateToStr(new Date());
+    
+    super(wrapper, todayString);
     const thisWidget = this;
 
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
     thisWidget.initPlugin();
+    thisWidget.dom.input.value = todayString;
   }
   initPlugin(){
     const thisWidget = this;
