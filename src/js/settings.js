@@ -42,7 +42,12 @@ export const select = {
   booking: {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
+    room: '.floor-plan',
     tables: '.floor-plan .table',
+    startersOptions: '.starters',
+    formSubmit: '.order-confirmation [type="submit"]',
+    phone: '[name="phone"]',
+    address: '[name="address"]',
   },
   nav: {
     links: '.main-nav a',
@@ -79,6 +84,7 @@ export const classNames = {
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    selected: 'selected',
   },
   nav: {
     active: 'active',
@@ -118,6 +124,7 @@ export const settings = {
   },
   booking: {
     tableIdAttribute: 'data-table',
+    starterCheckboxName: 'starter',
   },
 };
 
