@@ -9,6 +9,8 @@
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-grid.css">
+  <link rel="stylesheet" href="vendor/flickity.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,6 +23,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +65,9 @@
   </header>
 
   <div id="pages">
+    <section id="home">
+      <div class="home-wrapper container"></div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -69,6 +75,75 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+
+
+
+
+
+    <script id="template-home-page" type="text/x-handlebars-template">
+      <div class="home-page">
+        <div class="bootstrap-container">
+          <div class="row">
+            <div class="brd col-6">
+              content
+            </div>
+            <div class="brd col-6">
+              content
+            </div>
+            <div class="brd col-12">
+              content
+            </div>
+          </div>
+        </div>
+        <div class="bootstrap-container">
+          <div class="row">
+            <div class="brd slider col-12">
+              <div class="slider-cell">cell-1</div>
+              <div class="slider-cell">cell-2</div>
+              <div class="slider-cell">cell-3</div>
+              <div class="slider-cell">cell-4</div>
+            </div>
+          </div>
+        </div>
+        <div class="bootstrap-container">
+          <div class="row">
+            <div class="brd col-4">
+              <div class="img-container">
+                <img alt="picture" src="images/pizza-4.jpg">
+              </div>
+            </div>
+            <div class="brd col-4">
+              <div class="img-container">
+                <img alt="picture" src="images/pizza-5.jpg">
+              </div>
+            </div>
+            <div class="brd col-4">
+              <div class="img-container">
+                <img alt="picture" src="images/pizza-6.jpg">
+              </div>
+            </div>
+            <div class="brd col-4">
+              <div class="img-container">
+                <img alt="picture" src="images/pizza-7.jpg">
+              </div>
+            </div>
+            <div class="brd col-4">
+              <div class="img-container">
+                <img alt="picture" src="images/pizza-8.jpg">
+              </div>
+            </div>
+            <div class="brd col-4">
+              <div class="img-container">
+                <img alt="picture" src="images/pizza-9.jpg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+
+
 
     <script id="template-cart-product" type="text/x-handlebars-template">
       <li>
@@ -246,6 +321,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.min.js"></script>
+  <script src="vendor/flickity.pkgd.min.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
 </html>
