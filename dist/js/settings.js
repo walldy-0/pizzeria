@@ -73,6 +73,9 @@ export const select = {
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
+  home: {
+    slider: '.slider',
+  },
 };
 
 export const classNames = {
