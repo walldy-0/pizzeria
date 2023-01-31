@@ -109,6 +109,7 @@
   }
 }
 
+// todo consultation
 .img-container {
   position: relative;
   transition: $transition;
@@ -120,24 +121,22 @@
     border-radius: $radius;
   }
 
-  &:hover {
-    background: $color-dark;
-    opacity: 0.8;
-    transition: $transition;
-  }
-
-  // TODO display icons
-  div {
+  ul {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
     width: 100%;
     height: 100%;
-    display: none;
-
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    //display: none;
+    
     &:hover {
-      display: block;
+      background: $color-dark;
+      opacity: 0.8;
+      transition: $transition;
     }
   }
 
