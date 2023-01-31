@@ -8,6 +8,7 @@ class Home {
 
     thisHome.render(wrapper);
     thisHome.initWidgets();
+    thisHome.initActions();
   }
 
   render(wrapper) {
@@ -15,9 +16,19 @@ class Home {
 
     thisHome.dom = {};
 
-    const generatedHTML = templates.homePage();
+    const generatedHomeHTML = templates.homePage();
     thisHome.dom.wrapper = wrapper;
-    thisHome.dom.wrapper.appendChild(utils.createDOMFromHTML(generatedHTML));
+    thisHome.dom.wrapper.appendChild(utils.createDOMFromHTML(generatedHomeHTML));
+
+    const generatedAwesomeIconsHTML = templates.awesomeIcons();
+    thisHome.dom.imageWrappers = thisHome.dom.wrapper.querySelectorAll(select.home.imgContainer);
+
+    for (const wrap of thisHome.dom.imageWrappers) {
+      wrap.appendChild(utils.createDOMFromHTML(generatedAwesomeIconsHTML));
+    }
+
+    thisHome.dom.linkOrder = thisHome.dom.wrapper.querySelector(select.home.linkOrder);
+    thisHome.dom.linkBooking = thisHome.dom.wrapper.querySelector(select.home.linkBooking);
   }
 
   initWidgets() {
@@ -25,7 +36,35 @@ class Home {
 
     thisHome.dom.slider = thisHome.dom.wrapper.querySelector(select.home.slider);
     thisHome.sliderWidget = new SliderWidget(thisHome.dom.slider);
-    console.log('init', thisHome.sliderWidget);
+  }
+
+  initActions() {
+    const thisHome = this;
+
+    thisHome.dom.linkOrder.addEventListener('click', function(event) {
+      thisHome.openTab(thisHome.getPageIdFromClickedLink(event));
+    });
+
+    thisHome.dom.linkBooking.addEventListener('click', function(event) {
+      thisHome.openTab(thisHome.getPageIdFromClickedLink(event));
+    });
+  }
+
+  getPageIdFromClickedLink(event) {
+    return event.target.classList.value.substring(event.target.classList.value.lastIndexOf('-') + 1, event.target.classList.value.length);
+  }
+
+  openTab(target)  {
+    const thisHome = this;
+
+    const event = new CustomEvent('open-tab', {
+      bubbles: true,
+      detail: {
+        pageId: target,
+      },
+    });
+
+    thisHome.dom.wrapper.dispatchEvent(event);
   }
 }
 

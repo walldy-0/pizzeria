@@ -100,7 +100,14 @@ const app = {
   },
 
   initHome: function() {
-    new Home(document.querySelector(select.containerOf.home));
+    const thisApp = this;
+
+    const homeElm = document.querySelector(select.containerOf.home);
+    thisApp.home = new Home(homeElm);
+
+    homeElm.addEventListener('open-tab', function(event) {
+      thisApp.activatePage(event.detail.pageId);
+    });    
   },
 
   initBooking: function() {

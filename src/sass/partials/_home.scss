@@ -1,14 +1,9 @@
-.brd {
-  //border: 2px solid red;
-}
+.row {
+  margin: 0;
 
-.home-wrapper {
-  //margin: ($base-size * 3.5) auto;
-  //padding: ($base-size * 6) ($base-size * 4);
-  //padding: ($base-size * 6) 0;//($base-size * 4);
-  //background: $color-light;
-  //border-bottom: 1px solid lighten($color-dark, 70%);
-  //border-radius: $radius;
+  div {
+    padding: 0;
+  }
 }
 
 .home-section {
@@ -23,16 +18,45 @@
 [class*="home-top-link-"] {
   background-position: center center;
   background-size: cover;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    color: $color-light;
+    font-size: 24px;
+    white-space: nowrap;
+    transition: $transition;
+  }
+
+  &:hover {
+    cursor: pointer;    
+  }
+
+  &:hover::after {
+    transition: $transition;
+    top: 40%;
+  }
 }
 
-.home-top-link-1 {
+.home-top-link-order {
   background-image: url('../../images/pizza-1.jpg');
-  //margin-right: ($base-size / 4);
+
+  &::after {
+    content: 'order online';
+  }
 }
 
-.home-top-link-2 {
+
+.home-top-link-booking {
   background-image: url('../../images/pizza-2.jpg');
-  //margin-left: ($base-size / 4);
+
+  &::after {
+    content: 'book a table';
+  }
 }
 
 .home-top-info {
@@ -40,13 +64,10 @@
   background: $color-main;
   color: $color-light;
   text-align: center;
-  vertical-align: middle;
-  margin-top: ($base-size / 2);
 }
 
 .home-info {
   position: absolute;
-  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
@@ -64,31 +85,15 @@
   }
 }
 
-/*
-[class^="slider-"] {
-  position: relative;
-}*/
-
-/*
-.slider-image {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-}*/
-
 .slider-image img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: $radius;
-  transition: all .4s;
 }
 
-.slider-description {
-  //padding: 36px 0 36px 55%;
 
+.slider-description {
   h1 {
     font-size: 16px;
   }
@@ -98,24 +103,58 @@
     font-weight: normal;
     font-style: italic;
   }
-}
 
-/*
-.flickity-button {
-  display: none;
+  p, h1, h2 {
+    padding: 0 36px;
+  }
 }
-
-.flickity-page-dots {
-  bottom: -22px;
-}
-*/
 
 .img-container {
+  position: relative;
+  transition: $transition;
+
   img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-radius: $radius;
+  }
+
+  &:hover {
+    background: $color-dark;
+    opacity: 0.8;
+    transition: $transition;
+  }
+
+  // TODO display icons
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+    display: none;
+
+    &:hover {
+      display: block;
+    }
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  i {
+    font-size: 24px;
+    color: $color-light;
+    width: 30px;
+    transition: $transition;
+    
+    &:hover {
+      color: $color-main;
+      cursor: pointer;
+    }
   }
 }
 
@@ -125,4 +164,8 @@
   a {
     color: $color-main;
   }
+}
+
+.flatpickr-calendar {
+  display: none;
 }
